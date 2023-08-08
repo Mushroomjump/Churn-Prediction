@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Churn Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="SeniorCitizen">Senior Citizen:</label>
+        <input type="number" id="SeniorCitizen" name="SeniorCitizen" required><br><br>
+
+        <label for="Partner">Partner:</label>
+        <input type="radio" id="PartnerYes" name="Partner" value="Yes" required>
+        <label for="PartnerYes">Yes</label>
+        <input type="radio" id="PartnerNo" name="Partner" value="No" required>
+        <label for="PartnerNo">No</label><br><br>
+
+        <label for="Dependents">Dependents:</label>
+        <input type="radio" id="DependentsYes" name="Dependents" value="Yes" required>
+        <label for="DependentsYes">Yes</label>
+        <input type="radio" id="DependentsNo" name="Dependents" value="No" required>
+        <label for="DependentsNo">No</label><br><br>
+
+        <label for="tenure">Tenure:</label>
+        <input type="number" id="tenure" name="tenure" required><br><br>
+
+        <label for="MultipleLines">Multiple Lines:</label>
+        <input type="radio" id="MultipleLinesYes" name="MultipleLines" value="Yes" required>
+        <label for="MultipleLinesYes">Yes</label>
+        <input type="radio" id="MultipleLinesNo" name="MultipleLines" value="No" required>
+        <label for="MultipleLinesNo">No</label>
+        <input type="radio" id="MultipleLinesNoPhoneService" name="MultipleLines" value="No phone service" required>
+        <label for="MultipleLinesNoPhoneService">No Phone Service</label><br><br>
+
+        <label for="InternetService">Internet Service:</label>
+        <select id="InternetService" name="InternetService" required>
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber Optic</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="OnlineSecurity">Online Security:</label>
+        <input type="radio" id="OnlineSecurityYes" name="OnlineSecurity" value="Yes" required>
+        <label for="OnlineSecurityYes">Yes</label>
+        <input type="radio" id="OnlineSecurityNo" name="OnlineSecurity" value="No" required>
+        <label for="OnlineSecurityNo">No</label>
+        <input type="radio" id="OnlineSecurityNoInternetService" name="OnlineSecurity" value="No internet service" required>
+        <label for="OnlineSecurityNoInternetService">No Internet Service</label><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <h2>Submit CSV File here</h2>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="csv_file">Upload CSV File:</label>
+        <input type="file" id="csv_file" name="csv_file" accept=".csv" required><br><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    <script>
+        const inputTypeCSV = document.getElementById('csv_file');
+        const inputTypeEntries = document.getElementById('SeniorCitizen');
+        const inputFields = document.querySelectorAll('#SeniorCitizen, #PartnerYes, #PartnerNo, #DependentsYes, #DependentsNo, #tenure, #MultipleLinesYes, #MultipleLinesNo, #MultipleLinesNoPhoneService, #InternetService, #OnlineSecurityYes, #OnlineSecurityNo, #OnlineSecurityNoInternetService');
+        const formEntries = document.getElementById('form_entries');
+        const formCSV = document.getElementById('form_csv');
+
+        inputTypeCSV.addEventListener('change', function() {
+            if (this.checked) {
+                formEntries.style.display = 'none';
+                formCSV.style.display = 'block';
+            }
+        });
+
+        inputTypeEntries.addEventListener('change', function() {
+            if (this.checked) {
+                formCSV.style.display = 'none';
+                formEntries.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
